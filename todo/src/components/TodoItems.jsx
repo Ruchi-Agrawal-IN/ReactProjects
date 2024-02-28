@@ -1,24 +1,23 @@
+import PropTypes from "prop-types";
 
-const TodoItems = () => {
-    const tasks = ["task1", "task2", "task3", "task4", "task5"]
+const TodoItems = ({ Tasks }) => {
   return (
-   <>
-   <h3 style={{display:"flex", justifyContent: "center"}}>Todo Items</h3>
-   <ul>
-    <div>
-    {tasks.map(task => 
-        (<li className='task'  key={task}>{task}
+    <>
+      <h3 style={{ display: "flex", justifyContent: "center" }}>Todo Items</h3>
+      <ul>
+        {Tasks.map((task, index) => (
+          <li className="task" key={index}>
+            {task}
             <div className="btnContainer">
-             <button className="editTask">Edit</button>
+              <button className="btn">Edit</button>
             </div>
-        </li>)
-
-)}
-    
-    </div>
-   </ul>
-   </>
-  )
-}
-
-export default TodoItems
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+};
+TodoItems.propTypes = {
+  Tasks: PropTypes.array,
+};
+export default TodoItems;

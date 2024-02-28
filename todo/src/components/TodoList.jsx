@@ -1,38 +1,40 @@
-import {  useRef } from "react";
+import { useRef, useState } from "react";
 import TodoItems from "./TodoItems";
 const TodoList = () => {
-    
-    const inputRef = useRef(null);
-    const additem = ()=>{
-        console.log('add task clicked')
-        //console.log(inputRef.current.value);
+  const [tasks, setTasks] = useState([]);
+  const inputRef = useRef(null);
+  const additem = (e) => {
+    e.preventDefault();
+    if (inputRef.current.value.trim() !== "") {
+      console.log(inputRef.current.value);
+      setTasks([...tasks, inputRef.current.value]);
+      inputRef.current.value = "";
+      console.log({ tasks: tasks });
     }
-    
-  return(
-    <div className="todoMain" >
-        <div className="todoHeader"> 
+  };
+
+  return (
+    <div className="todoMain">
+      <div className="todoHeader">
         <h1>To Do List</h1>
-        </div>
-        <div className="formContainer">
-            <form className="inputForm" onSubmit={additem}>
-                <input ref={inputRef} className="taskInput" placeholder="Type your task here!" ></input>
-                <button className="addTask" type="submit">Add Task</button>
-            </form>
-        </div>
-        <div className="taskList">
-        <TodoItems/>
-        </div>
-            
+      </div>
+      <div id="formContainer">
+        <form className="inputForm" onSubmit={(e) => additem(e)}>
+          <input
+            ref={inputRef}
+            className="taskInput"
+            placeholder="Type your task here!"
+          ></input>
+          <button className="addTask" type="submit">
+            Add Task
+          </button>
+        </form>
+      </div>
+      <div className="taskList">
+        <TodoItems Tasks={tasks} />
+      </div>
     </div>
-
-   
-   
   );
+};
 
-  
-}
-
-export default TodoList
-
-
-
+export default TodoList;

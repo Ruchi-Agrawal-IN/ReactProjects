@@ -25,7 +25,7 @@
 h1{
 color: var(--textColor);
 }
-.formContainer{
+#formContainer{
   background-color: red;
   width: 100%;
   display: flex;
