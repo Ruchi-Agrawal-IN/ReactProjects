@@ -1,0 +1,71 @@
+#root{
+  /* margin: 0 auto; */
+  display: flex;
+  justify-content: center;
+  
+  box-sizing:border-box;
+  border: 2px solid rgb(4, 64, 54);
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  --textColor : rgb(30, 69, 30);
+}
+
+.todoMain{
+  background-color:rgb(190, 223, 190);
+  width:80vw;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(111, 207, 200);
+}
+
+h1{
+color: var(--textColor);
+}
+.formContainer{
+  background-color: red;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+}
+.inputForm{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(192, 243, 224);
+}
+.taskInput{
+  min-width: 200px;
+  height: 40px;
+  flex-grow: 1;
+  border-radius: 10px;
+  border: .5px solid,lightgray;
+  margin: 10px;
+  padding-left: 10px;
+}
+
+.addTask{
+  background-color: rgb(111, 207, 200);
+  height: 40px;
+  margin-right: 10px;
+}
+.taskList{
+  background-color: rgb(222, 237, 207);
+  color: var(--textColor);
+  width: 100%;
+  margin: 10px;
+}
+ul{
+  list-style:decimal;
+}
+li{
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+}
