@@ -7,16 +7,25 @@ const TodoList = () => {
     e.preventDefault();
     if (inputRef.current.value.trim() !== "") {
       console.log(inputRef.current.value);
-      setTasks([...tasks, inputRef.current.value]);
+      setTasks([...tasks, { text: inputRef.current.value, id: Date.now() }]);
       inputRef.current.value = "";
-      console.log({ tasks: tasks });
     }
   };
+  function handleDeleteTask(key) {
+    const filteredTasks = tasks.filter(function (ta) {
+      return ta.id !== key;
+    });
+    return setTasks(filteredTasks);
+  }
+
+  function handleEditTask(key) {
+    console.log("editTask called for task with key:", key);
+  }
 
   return (
     <div className="todoMain">
       <div className="todoHeader">
-        <h1>To Do List</h1>
+        <h2>To Do List</h2>
       </div>
       <div id="formContainer">
         <form className="inputForm" onSubmit={(e) => additem(e)}>
@@ -31,7 +40,11 @@ const TodoList = () => {
         </form>
       </div>
       <div className="taskList">
-        <TodoItems Tasks={tasks} />
+        <TodoItems
+          Tasks={tasks}
+          handleDeleteTask={handleDeleteTask}
+          handleEditTask={handleEditTask}
+        />
       </div>
     </div>
   );
