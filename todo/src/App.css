@@ -64,7 +64,7 @@ color: var(--textColor);
   color: var(--textColor);
   width: 100%;
   margin: 10px;
-  overflow: scroll;
+  overflow: auto;
 }
 ul{
   list-style:decimal;
