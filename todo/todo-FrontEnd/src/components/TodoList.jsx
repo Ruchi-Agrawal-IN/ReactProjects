@@ -1,14 +1,36 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TodoItems from "./TodoItems";
+import { GetAllTasks, AddTask } from "../apiCalls/Tasks";
 const TodoList = () => {
   const [tasks, setTasks] = useState([]);
   const inputRef = useRef(null);
+  useEffect(()=>{
+    const getData = async() =>{
+      try {
+        const response = await GetAllTasks();
+        console.log({response:response.data})
+        if(response.data.success){
+          setTasks(response.data.data)
+          console.log(tasks)
+        }
+      } catch (error) {
+        console.log(error.message)
+      }
+    }
+    getData();
+  }, [])
   const additem = (e) => {
     e.preventDefault();
     if (inputRef.current.value.trim() !== "") {
       console.log(inputRef.current.value);
-      setTasks([...tasks, { text: inputRef.current.value, id: Date.now() }]);
-      inputRef.current.value = "";
+      // setTasks([...tasks, { text: inputRef.current.value, id: Date.now() }]);
+      // inputRef.current.value = "";
+      const response = AddTask(inputRef.current.value).then(res => {
+
+        console.log(`Add Task Api Response `, res.data);
+        
+      })
+
     }
   };
   function handleDeleteTask(key) {

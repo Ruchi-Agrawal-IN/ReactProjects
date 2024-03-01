@@ -1,7 +1,7 @@
 
 const status = require('http-status');
 const has = require('has-keys');
-const Tasks = [
+let Tasks = [
   { text: "task1", id: "xyz-1" },
   { text: "task2", id: "xyz-2" },
   { text: "task3", id: "xyz-3" },
@@ -34,11 +34,11 @@ module.exports={
       },
 
       async addTask(req, res){
-        if(!has(req.params, ['text', 'id']))
+        if(!has(req.body, ['text', 'id']))
         throw {code: status.BAD_REQUEST, message: 'You must specify some text'};
 
-        [...Tasks, req.body];
-        res.json({status: true, message: 'Task Added'})
+        Tasks = [...Tasks, req.body];
+        res.json({status: true, message: 'Task Added', data: Tasks})
       },
 
       async updateTask(req, res){
