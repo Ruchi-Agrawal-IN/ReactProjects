@@ -3,7 +3,7 @@ import { Card, Button, Row, Col, Container } from "react-bootstrap";
 import { FaEdit, FaHeart } from "react-icons/fa";
 const CustomCard = ({title, count}) => {
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card >
     <Card.Body >
         <div className="d-flex justify-content-between fs-4 ">
             <span className="rounded bg-warning p-1 lh-1 mb-3">0</span>
