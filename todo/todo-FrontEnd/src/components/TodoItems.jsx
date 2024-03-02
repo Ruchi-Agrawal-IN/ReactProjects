@@ -30,7 +30,6 @@ const TodoItems = ({ Tasks, handleDeleteTask, handleEditTask }) => {
     setIsDeletePopupOpen(false);
   };
 
-
   return (
     <>
       <h3 style={{ display: "flex", justifyContent: "center" }}>Todo Items</h3>
@@ -40,8 +39,10 @@ const TodoItems = ({ Tasks, handleDeleteTask, handleEditTask }) => {
           <li key={task.id}>
             {task.text}
             <div className="btnContainer">
-            <button id="editBtn" onClick={handleEditClick} ><FaEdit/></button>
-              <button id="deleteBtn" onClick={() => handleDeleteTask(task.id)}>
+              <button id="editBtn" onClick={handleEditClick}>
+                <FaEdit />
+              </button>
+              <button id="deleteBtn" onClick={() => handleDeleteTask(task._id)}>
                 <FaTrash />
               </button>
             </div>
@@ -56,7 +57,6 @@ const TodoItems = ({ Tasks, handleDeleteTask, handleEditTask }) => {
                 />
               </div>
             )}
-       
           </li>
         ))}
       </ul>

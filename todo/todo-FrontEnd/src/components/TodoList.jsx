@@ -1,43 +1,42 @@
 import { useEffect, useRef, useState } from "react";
 import TodoItems from "./TodoItems";
-import { GetAllTasks, AddTask } from "../apiCalls/Tasks";
+import { GetAllTasks, AddTask, DeleteTask } from "../apiCalls/Tasks";
 const TodoList = () => {
   const [tasks, setTasks] = useState([]);
   const inputRef = useRef(null);
-  useEffect(()=>{
-    const getData = async() =>{
-      try {
-        const response = await GetAllTasks();
-        console.log({response:response.data})
-        if(response.data.success){
-          setTasks(response.data.data)
-          console.log(tasks)
-        }
-      } catch (error) {
-        console.log(error.message)
+  const getData = async () => {
+    try {
+      const response = await GetAllTasks();
+      console.log({ respose: response.data });
+      if (response.data.success) {
+        setTasks(response.data.data);
       }
+    } catch (error) {
+      console.log(error.message);
     }
+  };
+
+  useEffect(() => {
     getData();
-  }, [])
+  }, []);
   const additem = (e) => {
     e.preventDefault();
     if (inputRef.current.value.trim() !== "") {
       console.log(inputRef.current.value);
-      // setTasks([...tasks, { text: inputRef.current.value, id: Date.now() }]);
-      // inputRef.current.value = "";
-      const response = AddTask(inputRef.current.value).then(res => {
-
-        console.log(`Add Task Api Response `, res.data);
-        
-      })
-
+      AddTask({ text: inputRef.current.value })
+        .then((res) => {
+          setTasks(res);
+        })
+        .catch((error) => console.log(error.message));
     }
   };
-  function handleDeleteTask(key) {
-    const filteredTasks = tasks.filter(function (ta) {
-      return ta.id !== key;
-    });
-    return setTasks(filteredTasks);
+  async function handleDeleteTask(key) {
+    // const filteredTasks = tasks.filter(function (ta) {
+    //   return ta.id !== key;
+    // });
+    console.log("deleteTask Key", key);
+    await DeleteTask(key);
+    getData();
   }
 
   function handleEditTask(key) {
@@ -64,7 +63,7 @@ const TodoList = () => {
       <div className="taskList">
         <TodoItems
           Tasks={tasks}
-          handleDeleteTask={handleDeleteTask}
+          handleDeleteTask={(e) => handleDeleteTask(e)}
           handleEditTask={handleEditTask}
         />
       </div>
