@@ -1,16 +1,25 @@
 import Container from "react-bootstrap/Container";
 import { Row, Col,Button } from "react-bootstrap";
 import CustomCard from "./CustomCard";
-
+import TaskForm from "./TaskForm";
+import { useState } from "react";
+import TaskModel from "./formModel/TaskModel";
 const Dashboard = () => {
+  // const[showTaskModel, setshowTaskModel]=useState(false)
+
+  const handleSaveTask = (task) => {
+    console.log('Saving task with name:', task);
+    // Add your save logic here
+    //setshowTaskModel(false); // Close the modal after saving
+  };
   return (
     <>
-
-        <Container className="bg-secondary">
-
         <div className="d-flex justify-content-between bg-primary">
             <h2>Task List</h2>
-            <a href="#" className="btn rounded bg-success ">Add New</a>
+      
+            <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#taskModel"> Add new</button>
+
+            <TaskModel onSave={handleSaveTask} />
         </div>
           <Row>
             <Col sm={12} md={6} lg={4} className="mb-4" >
@@ -29,7 +38,6 @@ const Dashboard = () => {
             <CustomCard title="Completed" count="0"/>
             </Col>
           </Row>
-        </Container>
     </>
   );
 };

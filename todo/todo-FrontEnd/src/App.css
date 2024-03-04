@@ -117,3 +117,8 @@ min-width: 200px;
  .confirmation-popup active{
   background: gray;
  }
+ .formWrapper{
+  overflow: auto;
+  background-color: antiquewhite;
+  padding: 10px
+ }

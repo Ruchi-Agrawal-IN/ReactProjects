@@ -1,17 +1,16 @@
 
 import './App.css'
 import Dashboard from './components/Dashboard'
-import TodoList from './components/TodoList'
-// import 'bootstrap/dist/css/bootstrap.min.css';
+// import Dashboard from './components/Dashboard'
+import TaskForm from './components/TaskForm'
+// import TodoList from './components/TodoList'
 function App() {
 
 
   return (
-    <>
-     {/* <TodoList/> */}
-     <Dashboard/>
-    </>
+    <Dashboard/>
   )
+
 }
 
 export default App
