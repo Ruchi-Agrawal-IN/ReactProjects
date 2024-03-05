@@ -1,47 +1,20 @@
-import { useRef, useState } from "react";
-
-const TaskForm = ({ onSave }) => {
-  const [task, setTask] = useState({
-    title: "",
-    note: "",
-    date: "",
-    time: "",
-    priority: "",
-    attachment: "",
-    iscompleted: false,
-  });
-
-  const titleRef = useRef(null);
-  const noteRef = useRef(null);
-  const dateRef = useRef(null);
-  const timeRef = useRef(null);
-  const priorityRef = useRef(null);
-  const iscompletedRef = useRef(null);
-
-  const handlesubmit = async(e) => {
-    e.preventDefault();
-    setTask({
-      title: titleRef.current.value,
-      note: noteRef.current.value,
-      date: dateRef.current.value,
-      time: timeRef.current.value,
-      priority: priorityRef.current.value,
-      iscompleted: iscompletedRef.current.checked, // Use checked property for checkbox
-    });
-
-    await onSave(task);
-    console.log("handlesubmit on form task call for task", task);
-  };
+import {useForm} from 'react-hook-form';
+const TaskForm = ({ onSave, onclose }) => {
+  const {register, handleSubmit} = useForm();
+  const onSubmit = (data) =>{
+    onSave(data);
+    onclose();
+  }
   return (
     <>
       <div className="formWrapper m-3">
-        <form onSubmit={handlesubmit}>
+        <form onSubmit={handleSubmit(data => onSubmit(data))}>
           <div className="mb-3">
             <label htmlFor="title" className="form-label">
               Title
             </label>
             <input
-              ref={titleRef}
+              {...register('title')}
               type="text"
               className="form-control"
               id="title"
@@ -52,7 +25,7 @@ const TaskForm = ({ onSave }) => {
               Note
             </label>
             <input
-              ref={noteRef}
+             {...register('note')}
               type="textarea"
               className="form-control"
               id="detail"
@@ -64,7 +37,7 @@ const TaskForm = ({ onSave }) => {
               Date
             </label>
             <input
-              ref={dateRef}
+              {...register('date')}
               type="date"
               className="form-control"
               id="selectedDate"
@@ -75,14 +48,14 @@ const TaskForm = ({ onSave }) => {
               Time
             </label>
             <input
-              ref={timeRef}
+               {...register('time')}
               type="time"
               className="form-control"
               id="selectedTime"
             />
           </div>
           <select
-            ref={priorityRef}
+             {...register('priority')}
             className="mb-3  form-select "
             defaultValue={3}
           >
@@ -95,7 +68,7 @@ const TaskForm = ({ onSave }) => {
           <div className="input-group mb-3">
             <div className="input-group-text">
               <input
-                ref={iscompletedRef}
+                 {...register('isCompleted')}
                 className="form-check-input mt-0"
                 type="checkbox"
                 value=""

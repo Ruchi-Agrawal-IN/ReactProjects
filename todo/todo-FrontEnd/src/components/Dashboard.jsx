@@ -4,9 +4,13 @@ import CustomCard from "./CustomCard";
 import TaskForm from "./TaskForm";
 import { useState } from "react";
 import TaskModel from "./formModel/TaskModel";
+import LoginModal from "./formModel/LoginModal";
 const Dashboard = () => {
   // const[showTaskModel, setshowTaskModel]=useState(false)
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
+  const handleCloseLogin = () => setShowLoginModal(false);
+  const handleShowLogin = () => setShowLoginModal(true);
   const handleSaveTask = (task) => {
     console.log('Saving task with name:', task);
     // Add your save logic here
@@ -14,11 +18,12 @@ const Dashboard = () => {
   };
   return (
     <>
-        <div className="d-flex justify-content-between bg-primary">
+        <div className="d-flex justify-content-between ">
             <h2>Task List</h2>
       
             <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#taskModel"> Add new</button>
-
+            <Button variant="primary" onClick={handleShowLogin}>Login</Button>
+            <LoginModal show={showLoginModal} handleClose={handleCloseLogin}/>
             <TaskModel onSave={handleSaveTask} />
         </div>
           <Row>
