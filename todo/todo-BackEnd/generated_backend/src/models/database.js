@@ -1,9 +1,6 @@
 const { DB_URL } = process.env;
-
-const { MongoClient } = require("mongodb");
-
-let conn = new MongoClient(DB_URL, { useUnifiedTopology: true });
-
+const mongoose = require("mongoose");
+let conn = mongoose.connect(DB_URL);
 module.exports = {
   /**
    * Singleton-like Database Object that connects to the mongodb database

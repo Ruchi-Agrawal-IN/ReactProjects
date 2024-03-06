@@ -11,6 +11,7 @@ export const GetAllTasks = async () => {
   }
 };
 export const AddTask = async (payload) => {
+  console.log("AddTask called with payload", payload);
   try {
     const response = await axiosInstance.post(`${MODEL}/add`, payload);
     return response;

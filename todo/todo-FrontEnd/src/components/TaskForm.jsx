@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { useRef, useState } from "react";
 
 const TaskForm = ({ onSave }) => {
@@ -31,6 +32,17 @@ const TaskForm = ({ onSave }) => {
 
     await onSave(task);
     console.log("handlesubmit on form task call for task", task);
+=======
+import {useForm} from 'react-hook-form';
+import { AddTask } from "../apiCalls/Tasks";
+
+const TaskForm = ({ onSave, onclose }) => {
+  const {register, handleSubmit} = useForm();
+  const onSubmit = async (data) => {
+    await AddTask(data);
+    onSave(data);
+    onclose();
+>>>>>>> Stashed changes
   };
   return (
     <>
